@@ -6,7 +6,7 @@ const getAllProducts = async () => {
     } catch (error) {
         console.error('Error querying MySql:', error);
         throw error;
-    }
+    } 
 }
 module.exports = {
     getAllProducts,
