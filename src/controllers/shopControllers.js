@@ -2,9 +2,9 @@ const path = require('path');
 const {getAll} = require('../models/product.model');
 module.exports = {
 shop: async (req, res) => {
-    const dbdata = await getAll();
+    const data = await getAll();
 
-    console.log(dbdata);
+    console.log(data);
        
     
     res.render(path.resolve(__dirname, '../views/shop/shop.ejs'), {
