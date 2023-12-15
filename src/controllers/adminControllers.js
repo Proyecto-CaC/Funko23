@@ -1,4 +1,5 @@
 const path = require('path');
+const {getAll} = require('../models/product.model');
 
 module.exports = {
 admin: (req, res) => res.render(path.resolve(__dirname, '../views/admin/admin.ejs'),{
