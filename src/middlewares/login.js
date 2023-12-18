@@ -1,4 +1,4 @@
-/*const isLogged = (req, res, next) => {
+const isLogged = (req, res, next) => {
     if (req.session.isLogged) {
      return next();
     }
@@ -10,4 +10,3 @@
     isLogged
   }
 
-*/

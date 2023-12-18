@@ -20,7 +20,7 @@ create: (req, res) => res.render(path.resolve(__dirname, '../views/admin/create.
 }),
 
 createItem: async (req, res) => {
-
+    const {id} = req.params;
     const product_schema = {
         
         product_name: req.body.name,
@@ -30,14 +30,12 @@ createItem: async (req, res) => {
         discount: Number(req.body.discount),
         sku: req.body.sku,
         dues: Number(req.body.dues),
-        image_front: '/products/'+req.files[0].originalname,
-        image_back: '/products/'+req.files[1].originalname,
         licence_id: Number(req.body.licence),
         category_id: Number(req.body.category),
      
     }
-     const result = await createItem([Object.values(product_schema)]);
-  console.log(result)
+    await createItem([Object.values(product_schema)]);
+ 
    
     res.redirect('/admin')
 },
@@ -47,7 +45,7 @@ edit: async (req, res) => {
 const {id} = req.params;
 
 const [product] = await getOne({product_id: id});
-console.log(product);
+
     res.render(path.resolve(__dirname, '../views/admin/edit.ejs'),{
         title: 'Editar Item',
         product
@@ -56,9 +54,6 @@ console.log(product);
 },
 
 editItem: async (req, res) => {
-    console.log('ID: ', req.params);
-    console.log('Body:', req.body);
-    console.log('Files: ', req.files);
 const {id} = req.params;
     const haveImages = req.files.length !== 0;
 
@@ -89,7 +84,7 @@ const {id} = req.params;
 
 await editItem(product_schema, {product_id: id}),
 
-    res.redirect('/admin');
+    res.redirect('/shop');
 },
 
 

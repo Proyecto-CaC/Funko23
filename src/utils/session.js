@@ -1,4 +1,4 @@
-/*const session = require('cookie-session');
+const session = require('cookie-session');
 
 require('dotenv').config();
 
@@ -9,4 +9,4 @@ function initSession() {
     });
 };
 
-module.exports = {initSession};   */
+module.exports = {initSession}; 

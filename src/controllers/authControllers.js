@@ -20,7 +20,7 @@ loginUser: (req, res) => {
 
     if (req.session.isLogged) {
         res.locals.isLogged = true;
-        return res.redirect('../views/admin/admin.ejs');
+        return res.redirect('/admin');
     }
 
     return res.status(401).send('Credenciales inválidas');

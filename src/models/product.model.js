@@ -35,19 +35,15 @@ const getOne = async (params) =>{
 
 const createItem = async (params) => {
   try {
-      const [product] = await conn.query('INSERT INTO product (product_name, product_description, price, stock, discount, sku, dues, image_front, image_back, create_time, licence_id, category_id) VALUES ?;', [params]);
-      return product;
-  console.log(product)
-      } catch (error) {
-        return  {
-      error: true,
-      message: 'Hemos encontrado un error al crear: ' + error,
-        }
-  } finally {
-      conn.releaseConnection();
-     }
-    }
-
+    const [product] = await conn.query('INSERT INTO product (product_name, product_description, price, stock, discount, sku, dues, licence_id, category_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', params);
+    conn.releaseConnection(); // Release the connection
+    return product;
+  } catch (error) {
+    console.error('An error occurred while creating the item:', error);
+    conn.releaseConnection(); // Release the connection even in case of error
+    throw error; // Re-throw the error to be handled by the caller
+  }
+};
     const editItem = async (params, id) => {
       try {
           const [product] = await conn.query('UPDATE product SET ? WHERE ?', [params, id]);

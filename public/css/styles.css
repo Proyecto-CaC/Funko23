@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200&family=Raleway:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Raleway:wght@100;300;400;500;600;700;900&display=swap');
 @import url('https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css');
 @import url('https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.theme.min.css');
 
@@ -53,9 +53,10 @@
 }
 
 html{
-    font-size: var(--font-16-small);
+    
     color:var(--dark-solid);
     font-family: var(--base-font); 
+    --bs-gutter-x: 1.5rem;
 }
 
 a{
@@ -68,6 +69,7 @@ header,
 footer{
     font-family: var(--alternative-font);
     color:var(--light-font-solid);
+    
 }
 
 ul {
@@ -79,7 +81,7 @@ ol{
 }
 
 p{
-    font-size: 1.8em;
+    font-size: 1.7em;
 }
 
 h1 {
@@ -87,10 +89,11 @@ h1 {
   font-weight: 300;
 }
 .container{
-    width: clamp(260px, 90%, 1280px);
+    width: clamp(260px, 100%, 1280px);
     margin: 0 auto;
     font-family: var(--base-font);
     font-weight: bolder;
+    font-size: 1rem;
 }
 
 img{
@@ -120,11 +123,12 @@ header{
 }
 
 .navbar__link{
-    font-size: var(--font-medium);
+   
     padding: var(--spacing-8) var(--spacing-16);
     display: inline-block;
     transition: background .3s ease-in-out;
     position: relative;
+    font-size: (var(--font-18-medium));
 }
 
 .navbar__link:hover {
@@ -152,7 +156,7 @@ header{
 .submenu__link{
     display: block;
     padding: var(--spacing-8) var(--spacing-16);
-    font-size: var(--font-medium);
+    font-size: 16px;
     transition: background .3s ease-in-out;
 }
 
@@ -194,7 +198,7 @@ header{
 
 .hero_title{
     font-family: var(--alternative-font);
-    font-size: var(--font-jumbo);
+    font-size: var(--font-large);
     color: var(--light-font-solid);
 }
 
@@ -226,6 +230,7 @@ header{
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
     padding: var(--spacing-16) 0;
+    --bs-gutter-x: 1.5rem;
 }
 
 .collection:nth-child(2) .collection_cover{
@@ -241,7 +246,7 @@ header{
 
 .collection_title{
     font-family: var(--alternative-font);
-    font-size: var(--font-display);
+    font-size: var(--font-jumbo);
     font-weight: 500;
 }
 
@@ -277,7 +282,7 @@ header{
 
 .slider_title{
     font-family: var(--alternative-font);
-    font-size: var(--font-display);
+    font-size: var(--font-18-medium);
     text-transform: uppercase;
 }
 
@@ -385,7 +390,7 @@ header{
     width: 1000px;
     height: 195px;
     font-weight: 400;
-    font-size: var(--font-large);
+    font-size: var(--font-16-small);
     padding: var(--spacing-12)var(--spacing-8);
   }
   
@@ -491,7 +496,7 @@ header{
   }
   
   .item__name {
-    font-size: var(--font-jumbo);
+    font-size: var(--font-large);
     font-weight: 700;
   }
   
@@ -501,13 +506,14 @@ header{
   }
   
   .item__price {
-    font-size: var(--font-large);
+    font-size: var(--font-18-medium);
     font-weight: 400;
   }
   
   .item__cart {
     display: flex;
     gap: var(--spacing-16);
+    font-size: small;
   }
   
   .item__cart .item__quantity {
@@ -605,7 +611,7 @@ iconify-icon {
   }
   
   .register__title {
-    font-size: var(--font-jumbo);
+    font-size: var(--font-large);
   }
   
   .register__subtitle {
@@ -762,7 +768,7 @@ textarea::placeholder {
 
 .login__title {
     text-align: center;
-    font-size: var(--font-jumbo);
+    font-size: var(--font-large);
 }
 
 #login__form {
@@ -782,10 +788,11 @@ textarea::placeholder {
 /*Cart*/
 
 .main-container {
-    margin: var(--spacing-128) var(--spacing-80);
+   
     display: flex;
     flex-direction: column;
     gap: var(--spacing-42);
+    margin: 26px 467px 118px 476px;
 }
 
 .cart__title {
@@ -825,8 +832,9 @@ textarea::placeholder {
 
 /* INICIO DEL ASIDE */
 aside{
-    padding: 20px;
+    
     margin: 20px;
+    --bs-gutter-x: 1.5rem;
 }
 .shop__filters {
     display: flex;
@@ -939,6 +947,7 @@ aside{
     font-weight: 700;
     border-radius: 4px;
     padding: var(--spacing-12) var(--spacing-16);
+    margin-bottom: 5px;
     border: 2px solid var(--dark-300);
     transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
 }
@@ -998,7 +1007,7 @@ aside{
 
 .details__title {
     font-family: var(--base-font);
-    font-size: var(--font-large);
+    font-size: var(--font-16-small);
     font-weight: 700;
 }
 
@@ -1028,7 +1037,7 @@ aside{
 .price {
     color: var(--dark-bg-solid);
     font-family: var(--base-font);
-    font-size: var(--font-medium);
+    font-size: 16px;
     font-weight: 400;
 }
 
@@ -1241,9 +1250,11 @@ aside{
 }
 
 .filter_title{
-	font-size: var(--font-large);
+	font-size: var(--font-medium);
 	font-weight: 500;
 	margin-bottom: var(--spacing-8);
+    font-family: var(--base-font);
+    font-weight: 900;
 }
 .search_input{
     width: 100%;
@@ -1293,7 +1304,7 @@ input[type=number] {
 .minmax_price{
 	font-size: var(--font-small);
 	font-weight: 500;
-	padding-right: 15px;
+	padding-right: 2px;
 }
 .minmax_price_input{
 	font-size: var(--font-medium);
@@ -1351,8 +1362,8 @@ input[type=number] {
 	right: 0;
 	background-color: var(--primary-solid);
 	color: var(--light-font-solid);
-	font-size: var(--font-xsmall);
-	padding: var(--spacing-6) var(--spacing-16);
+	font-size: 15px;
+    padding: 10px;
 }
 
 /*admin*/
@@ -1445,7 +1456,7 @@ th.id {
 /*admin*/
 
 .main-container {
-    margin: 36px 209px 128px 110px;
+    margin: 26px 467px 118px 476px;
     display: flex;
     flex-direction: column;
     gap: 37px;

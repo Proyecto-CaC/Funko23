@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 const methodOverride = require('method-override');
 const path = require('path');
-//const {initSession} = require ('./src/utils/session');
+const session = require('cookie-session');
+const {initSession} = require ('./src/utils/session');
 
 
 /*Routes imports*/
@@ -11,6 +12,7 @@ const mainRoutes  = require('./src/routes/mainRoutes');
 const shopRoutes  = require('./src/routes/shopRoutes');
 const authRoutes  = require('./src/routes/authRoutes');
 const adminRoutes  = require('./src/routes/adminRoutes');
+const cookieSession = require('cookie-session');
 
 
 const PORT = 3004;
@@ -25,8 +27,7 @@ app.use(methodOverride('_method'));
 app.use(express.static('public'));
 
 
-//app.use(initSession())
-
+app.use(initSession());
 
 app.use('/', mainRoutes); 
 app.use('/shop', shopRoutes); 
