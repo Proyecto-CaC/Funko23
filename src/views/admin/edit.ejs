@@ -1,86 +1,121 @@
 <%- include('../partials/header.ejs')%>
 
-  <main class="main-container">
-    <h1 class="title__create">EDITAR ITEM</h1>
-    <form class="form">
-      <div class="form__categories">
-        <article>
-          <label class="text__label">Categoría</label>
-          <select class="text__selection">
-            <option>Figuras</option>
+<main class="container admin__main">
+  <h2 class="createdit__title">EDITAR Funko</h2>
+
+  <form class="createdit__form" action="/admin/edit/<%= product.product_id %>?_method=PUT" method="POST"
+      enctype="multipart/form-data">
+      <article class="form__cat-lic">
+          <div class="form__product">
+              <label class="form__label" for="category">Categoría:</label>
+              <select class="form-select-lg form__select" name="category" id="category" required>
+                  <option value="" disabled selected hidden>Seleccionar</option>
+                 <% if (product.category_id == 1) { %>
+                    <option value="1" selected>Figuras Coleccionables</option>
+                 }<option value="3" >Llaveros</option>
+                 <option value="2" >Remeras</option>
+                 <% } %>
+                 <% if (product.category_id == 2) { %>
+                    <option value="1" >Figuras Coleccionables</option>
+                 }<option value="3" >Llaveros</option>
+                 <option value="2" selected >Remeras</option>
+                 <% } %>
+                 <% if (product.category_id == 3) { %>
+                    <option value="1" >Figuras Coleccionables</option>
+                 }<option value="3" selected>Llaveros</option>
+                 <option value="2" >Remeras</option>
+                 <% } %>
+              </select>
+          </div>
+          <div class="form__product">
+              <label class="form__label" for="licence">Licencia:</label>
+              <select class="form-select-lg form__select" name="licence" id="licence" required>
+                  <option value="" disabled selected hidden>Seleccionar</option>
+                  <% if (product.licence_id == 2) { %>
+                    <option value="2" selected>Star Wars</option>
+                 }<option value="3" >Harry Potter</option>
+                 <option value="1" >Pokemon</option>
+                 <% } %>
+                 <% if (product.licence_id == 1) { %>
+                    <option value="2" >Star Wars</option>
+                 }<option value="3" >Harry Potter</option>
+                 <option value="1" selected>Pokemon</option>
+                 <% } %>
+                 <% if (product.licence_id == 3) { %>
+                    <option value="2" >Star Wars</option>
+                 }<option value="3" selected>Harry Potter</option>
+                 <option value="1" >Pokemon</option>
+                 <% } %>
+              </select>
+          </div>
+      </article>
+      <!-- Nombre y descripción del producto -->
+      <article class="createdit__name">
+          <label class="form__label" for="name">Nombre del producto:</label>
+          <input class="form__input createdit__input" type="text" name="name" id="name"
+              value="<%= product.product_name %>" required>
+          <div>
+              <textarea class="form__textarea--createdit" name="description" id="description" rows="13"
+                  required><%= product.product_description %></textarea>
+          </div>
+      </article>
+      <!-- Datos del producto línea 1 -->
+      <article class="createdit__block d-flex mb-5">
+          <div class="d-flex">
+              <label class="form__label" for="sku">SKU:</label>
+              <input class="form__input w-75" type="text" name="sku" id="sku" value="<%= product.sku %>" required>
+          </div>
+          <div class="d-flex">
+              <label class="form__label" for="price">Precio:</label>
+              <input class="form__input w-75" type="text" name="price" id="price" data-type="currency"
+                  value="<%= product.price %>">
+          </div>
+          <div class="d-flex">
+              <label class="form__label" for="stock">Stock:</label>
+              <input class="form__input discount" type="text" name="stock" id="stock" value="<%= product.stock %>"
+                  required>
+          </div>
+      </article>
+      <!-- Datos del producto línea 2 -->
+      <article class="createdit__block d-flex mb-5">
+          <label class="form__label" for="discount">Descuento:</label>
+          <input class="form__input discount" type="text" name="discount" id="discount"
+              value="<%= product.discount %>" required>
+
+          <label class="form__label" for="dues">Cuotas:</label>
+          <select class="form-select-lg form__select form__input" name="dues" id="dues">
+              <option value="0" <%= product.dues===0 ? 'selected' : '' %> >Sin cuotas</option>
+              <option value="3" <%= product.dues===3 ? 'selected' : '' %> >3 cuotas s/ interés</option>
+              <option value="6" <%= product.dues===6 ? 'selected' : '' %> >6 cuotas s/ interés</option>
+              <option value="9" <%= product.dues===9 ? 'selected' : '' %> >9 cuotas s/ interés</option>
+              <option value="12" <%= product.dues===12 ? 'selected' : '' %> >12 cuotas s/ interés</option>
+              <option value="18" <%= product.dues===18 ? 'selected' : '' %> >18 cuotas s/ interés</option>
+              <option value="24" <%= product.dues===24 ? 'selected' : '' %> >24 cuotas s/ interés</option>
           </select>
-        </article>
-        <article>
-          <label class="text__label">Licencia</label>
-          <select class="text__selection">
-            <option>Naruto Shipudden</option>
-          </select>
-        </article>
+      </article>
+
+      <!-- Carga de imágenes -->
+      <div class="form__flex block__data">
+          <label class="form__label" for="images">Imagenes:</label>
+          <input class="form__files" type="file" name="images" id="images" multiple>
+      </div>
+      <div class="form__flex gap-5">
+          <div class="edit__img">
+              <img src="/img/<%= product.image_front %>" alt="<%= product.product_name %>">
+              <p class="edit__img-side">Frente</p>
+          </div>
+          <div class="edit__img">
+              <img src="/img/<%= product.image_back %>" alt="<%= product.product_name %> en caja">
+              <p class="edit__img-side">Dorso</p>
+          </div>
       </div>
 
-      <article class="product__name">
-        <label class="text__label">Nombre del producto:</label>
-        <p class="text__product-name-selection" contenteditable="true">Kakashi Hatake Shippuden Saga</p>
-      </article>
-
-      <article>
-        <p class="product__description-selection">Figura Funko coleccionable de Kakashi Hatake de la saga Naruto Shipudden invocando chidori.</p>
-      </article>
-
-      <section class="form__prices">
-        <div class="form__options">
-
-          <article class="product__name">
-            <label class="text__label">SKU:</label>
-            <p class="count__number-selection" contenteditable="true">NAR001012</p>
-          </article>
-          <article class="product__name">
-            <label class="text__label">Precio:</label>
-            <p class="count__number-selection" contenteditable="true">$ 1.799,00</p>
-          </article>
-          <article class="product__name">
-            <label class="text__label">Stock:</label>
-            <p class="count__number-selection" contenteditable="true">10</p>
-          </article>
-        </div>
-
-        <div class="form__discounts">
-          <article class="product__name">
-            <label class="text__label">Descuento:</label>
-            <p class="count__number-selection" contenteditable="true">10%</p>
-          </article>
-          <article>
-            <label class="text__label">Cuotas:</label>
-            <select class="text__selection">
-              <option value="1">6 Cuotas sin interés</option>
-              <option value="2">12 Cuotas sin interés</option>
-              <option value="3">3 Cuotas sin interés</option>
-          </select>
-          </article>
-        </div>
-      </section>
-
-      <article>
-        <label class="text__label">Imágenes:</label>
-        <input type="file" placeholder="Elegir Archivos">
-      </article>
-    
-      <section class="create__buttons">
-        <article>
-          <img class="product-image" src="/img/pokemon/charmander-1.webp">
-          <p class="img__text">Frente</p>
-        </article>
-        <article>
-          <img class="product-image" src="/img/pokemon/charmander-1">
-          <p class="img__text">Dorso</p>
-        </article>
-      </section>
-
-    </form>
-    <section class="create__buttons">
-      <button class="create__button">Modificar Producto</button>
-      </section>
-  </main>
+      <!-- Botones Agregar / Limpiar -->
+      <div class="form__flex gap-4">
+          <input class="btn form__btn btn-create" type="submit" value="Modificar Producto">
+      </div>
+  </form>
+</main>
 
 
   <%- include('../partials/footer.ejs')%>

@@ -1,16 +1,104 @@
 const path = require('path');
-const {getAll} = require('../models/product.model');
+const {getAll, getOne, createItem, deleteOne, editItem} = require('../models/product.model');
+const { error } = require('console');
 
 module.exports = {
-admin: (req, res) => res.render(path.resolve(__dirname, '../views/admin/admin.ejs'),{
-    title: 'Admin'
-}),
+admin: async (req, res) => {
+
+    const data = await getAll();
+
+    res.render(path.resolve(__dirname, '../views/admin/admin.ejs'),{
+        title: 'Admin',
+        data
+    })
+},
+
+
 create: (req, res) => res.render(path.resolve(__dirname, '../views/admin/create.ejs'), {
-    title: 'Crear un nuevo Item'
+    title: 'Crear un nuevo Item',
+
 }),
-createItem: (req, res) => res.send('Esta es la ruta para agregar nuevo ITEM'),
-edit: (req, res) => res.render(path.resolve(__dirname, '../views/admin/edit.ejs'),{
-title: 'Editar Item'}),
-editItem: (req, res) => res.send('Esta es la vista de MODIFICAR ITEM'),
-deleteItem : (req, res) => res.send('Esta es la vista para ELIMINAR nuevo ITEM'),
+
+createItem: async (req, res) => {
+
+    const product_schema = {
+        
+        product_name: req.body.name,
+        product_description: req.body.description,
+        price: Number(req.body.price),
+        stock: Number(req.body.stock),
+        discount: Number(req.body.discount),
+        sku: req.body.sku,
+        dues: Number(req.body.dues),
+        image_front: '/products/'+req.files[0].originalname,
+        image_back: '/products/'+req.files[1].originalname,
+        licence_id: Number(req.body.licence),
+        category_id: Number(req.body.category),
+     
+    }
+     const result = await createItem([Object.values(product_schema)]);
+  console.log(result)
+   
+    res.redirect('/admin')
+},
+
+
+edit: async (req, res) => {
+const {id} = req.params;
+
+const [product] = await getOne({product_id: id});
+console.log(product);
+    res.render(path.resolve(__dirname, '../views/admin/edit.ejs'),{
+        title: 'Editar Item',
+        product
+    })
+  
+},
+
+editItem: async (req, res) => {
+    console.log('ID: ', req.params);
+    console.log('Body:', req.body);
+    console.log('Files: ', req.files);
+const {id} = req.params;
+    const haveImages = req.files.length !== 0;
+
+    const product_schema = haveImages 
+    ? {
+        product_name: req.body.name,
+        product_description: req.body.description,
+        price: Number(req.body.price),
+        stock: Number(req.body.stock),
+        discount: Number(req.body.discount),
+        sku: req.body.sku,
+        dues: Number(req.body.dues),
+        image_front: '/products/'+req.files[0].filename,
+        image_back: '/products/'+req.files[1].filename,
+        licence_id: Number(req.body.licence),
+        category_id: Number(req.body.category),
+    } : {
+        product_name: req.body.name,
+        product_description: req.body.description,
+        price: Number(req.body.price),
+        stock: Number(req.body.stock),
+        discount: Number(req.body.discount),
+        sku: req.body.sku,
+        dues: Number(req.body.dues),
+        licence_id: Number(req.body.licence),
+        category_id: Number(req.body.category),
+    };
+
+await editItem(product_schema, {product_id: id}),
+
+    res.redirect('/admin');
+},
+
+
+deleteItem : async (req, res) => {
+    const {id} = req.params;
+
+    await deleteOne({product_id: id});
+
+    res.redirect('/admin');
+}
+
 }

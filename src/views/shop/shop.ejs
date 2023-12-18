@@ -2,12 +2,12 @@
 	<%- include('../partials/header.ejs')%>
 
     <!-- main -->
-
+	
     <div class="all_products_wrapper">
 		<aside class="filter_options_wrapper">
-			<form>
-				<h4 class="filter_title">BUSCAR</h4>
-				<input class="search_input" type="text" placeholder="item o categoria">
+			<form action="#" method="GET" id="search-form">
+				<h4 class="filter_title" for="buscar">BUSCAR</h4>
+				<input class="search_input" type="text" name="search-admin" id="search-admin" placeholder="item o categoria">
 				<h4 class="filter_title">ORDENAR POR</h4>
 				<!-- filter -->
 				<select class="filter_sort_by">
@@ -50,12 +50,14 @@
 
 		<main>
 
-			<ul class="products_row">
+			<ul class="products_row" class="row shop__items">
+
+				
 				<% data.forEach( item => { %>
-					<li class="single_product_wrapper">
+					<li class="single_product_wrapper" class="col-md-6 col-lg-4 shop__item">
 						<article>
-							<a href="">
-								<picture>
+							<a href="/shop/item/<%= item.product_id%>">
+								<picture class="item__cover card-item_cover">
 									<img class="card-item_img-front" src="img/<%= item.image_front %>" alt="<%= item.licence_description %>">
 									<img class="card-item_img-back" src="img/<%= item.image_back %>" alt="<%= item.licence_description %>">
 								</picture>
@@ -69,7 +71,9 @@
 							<div class="new_product">NUEVO</div>
 						</article>
 					</li>
-			<%	}) %>
+
+			    <%	}) %>
+			
 			</ul>
 			<div class="pagination">
                 <a class="pagination__link" href="#"><</a>
@@ -90,5 +94,6 @@
 	  <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 	  <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
 	  <script src="./js/glide.js"></script>
+	  
 </body>
 </html>

@@ -11,11 +11,11 @@ contact: (req, res) => {
 },
 about: (req, res) => {
     res.render('/shop/contact', {
-        title: 'Contacto',
+        title: 'Nosotros',
     });
 },
 faqs: (req, res) => {
-    res.render('/shop/contact', {
+    res.render('/shop/faqs', {
         title: 'Preguntas Frecuentes',
     });
 },

@@ -15,14 +15,15 @@ shop: async (req, res) => {
 item: async (req, res) => {
     const itemId = req.params.id;
     
-    const [ item ] = await getOne(itemId);
-
+    const [ item ] = await getOne({product_id : itemId});
+    
     res.render(path.resolve(__dirname, '../views/shop/item.ejs'), {
         title: 'Item',
         item,
     });
 },
 addItem: (req, res) => res.send('Esta es la ruta para agregar un nuevo item'),
+
 cart: (req, res) =>
     res.render(path.resolve(__dirname, '../views/shop/cart.ejs'), {
         title: 'Carrito',

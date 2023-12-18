@@ -1,169 +1,75 @@
 <%- include('../partials/header.ejs')%>
 
-  <main class= "container" class="main-container">
-    <section class="searcher">
-        <picture>
-            <img class="searcher__lens" src="img/icons/search_icon.svg" alt="Icono Buscar">
-        </picture>
-        <input class="searcher__text" type="text" placeholder="código, nombre o categoria">
+<main class="container admin">
+    <form action="" class="form__admin">
+        <iconify-icon icon="ion:search-sharp" class="search__icon"></iconify-icon>
+        <input class="search__input" type="text" name="search-admin" id="search-admin"
+            placeholder="código, nombre, licencia o categoría">
+    </form>
+    <section class="listado__head">
+        <h1 class="listado__title" style="font-size: large;">LISTADO DE PRODUCTOS</h1>
+        <div class="listado__add">
+            <h2>AGREGAR</h2>
+            <a href="/admin/create"><iconify-icon class="listado__add--icon"
+                    icon="icon-park-solid:add"></iconify-icon></a>
+        </div>
+    </section>
+    <section class="listado_products">
+        <div class="row">
+            <div class="col">
+
+                <table class="container table table-borderless listado__table">
+                    <thead>
+                        <tr>
+                            <th scope="col-1">ID</th>
+                            <th scope="col-3">Código</th>
+                            <th scope="col-3">Nombre del Producto</th>
+                            <th scope="col-3">Licencia</th>
+                            <th scope="col-3">Categoría</th>
+                            <th scope="col-1"></th>
+                            <th scope="col-1"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% data.forEach(item => { %>
+                            <tr>
+                                <th class="id" scope="row">
+                                    <%= item.product_id %>
+                                </th>
+                                <td>
+                                    <%= item.sku %>
+                                </td>
+                                <td>
+                                    <%= item.product_name %>
+                                </td>
+                                <td>
+                                    <%= item.licence_name %>
+                                </td>
+                                <td>
+                                    <%= item.category_name %>
+                                </td>
+                                <td><a href="/admin/edit/<%= item.product_id %>">
+                                        <iconify-icon class="td__icon--edit"
+                                            icon="material-symbols:edit"></iconify-icon>
+                                    </a>
+                                </td>
+                                <td>
+                                    <form action="/admin/delete/<%= item.product_id %>?_method=DELETE"
+                                        method="POST">
+                                        <button class="btn__borrar--item" type="submit">
+                                            <iconify-icon class="td__icon--delete"
+                                                icon="material-symbols:delete"></iconify-icon>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </section>
 
-    <section class="list">
-        <section class="list__options">
-            <h2 class="list__title">LISTADO DE PRODUCTOS</h2>
-            <div class="add">
-                <p class="add-text">AGREGAR</p>
-                <button class="add-button">
-                    <svg width="52" height="53" viewBox="0 0 52 53" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M36.8333 28.4516H28.1667V37.1182H23.8333V28.4516H15.1667V24.1182H23.8333V15.4516H28.1667V24.1182H36.8333M41.1667 6.78491H10.8333C8.42833 6.78491 6.5 8.71325 6.5 11.1182V41.4516C6.5 42.6009 6.95655 43.7031 7.76920 44.5157C8.58186 45.3284 9.68406 45.7849 10.8333 45.7849H41.1667C42.3159 45.7849 43.4181 45.3284 44.2308 44.5157C45.0435 43.7031 45.5 42.6009 45.5 41.4516V11.1182C45.5 9.96897 45.0435 8.86677 44.2308 8.05412C43.4181 7.24146 42.3159 6.78491 41.1667 6.78491Z"
-                            fill="#FF3333" />
-                    </svg>
-                </button>
-            </div>
-        </section>
-        <table>
-            <tr class="list__details">
-                <th class="details__text">ID</th>
-                <th class="details__text">Código</th>
-                <th class="details__text">Nombre del Producto</th>
-                <th class="details__text">Categoria</th>
-                <th class="details__text"> </th>
-            </tr>
-            <!--<section class="items">-->
-            <tr class="item">
-                <th class="item__detail">1</th>
-                <th class="item__detail">STW001001</th>
-                <th class="item__detail">Baby Yoda Blueball</th>
-                <th class="item__detail">STAR WARS</th>
-                <th class="item__modify">
-                    <img class="modify-edit" src="img/icons/edit_pencil.svg" alt="Icono Editar">
-                    <img class="modify-delete" src="img/icons/delete_trash.svg" alt="Icono Eliminar">
-                </th>
-            </tr>
-            <tr class="item">
-                <th class="item__detail">2</th>
-                <th class="item__detail">STW001002</th>
-                <th class="item__detail">Boba Fett Fighter</th>
-                <th class="item__detail">STAR WARS</th>
-                <th class="item__modify">
-                    <img class="modify-edit" src="img/icons/edit_pencil.svg" alt="Icono Editar">
-                    <img class="modify-delete" src="img/icons/delete_trash.svg" alt="Icono Eliminar">
-                </th>
-            </tr>
-            <tr class="item">
-                <th class="item__detail">3</th>
-                <th class="item__detail">STW001003</th>
-                <th class="item__detail">Luke Skylwalker & Grogu</th>
-                <th class="item__detail">STAR WARS</th>
-                <th class="item__modify">
-                    <img class="modify-edit" src="img/icons/edit_pencil.svg" alt="Icono Editar">
-                    <img class="modify-delete" src="img/icons/delete_trash.svg" alt="Icono Eliminar">
-                </th>
-            </tr>
-            <tr class="item">
-                <th class="item__detail">4</th>
-                <th class="item__detail">STW001004</th>
-                <th class="item__detail">Stormtrooper Lightsaber</th>
-                <th class="item__detail">STAR WARS</th>
-                <th class="item__modify">
-                    <img class="modify-edit" src="img/icons/edit_pencil.svg" alt="Icono Editar">
-                    <img class="modify-delete" src="img/icons/delete_trash.svg" alt="Icono Eliminar">
-                </th>
-            </tr>
-            <tr class="item">
-                <th class="item__detail">5</th>
-                <th class="item__detail">PKM001001</th>
-                <th class="item__detail">Charmander Smiley</th>
-                <th class="item__detail">POKEMON</th>
-                <th class="item__modify">
-                    <img class="modify-edit" src="img/icons/edit_pencil.svg" alt="Icono Editar">
-                    <img class="modify-delete" src="img/icons/delete_trash.svg" alt="Icono Eliminar">
-                </th>
-            </tr>
-            <tr class="item">
-                <th class="item__detail">6</th>
-                <th class="item__detail">PKM001002</th>
-                <th class="item__detail">Dragonite Hi!</th>
-                <th class="item__detail">POKEMON</th>
-                <th class="item__modify">
-                    <img class="modify-edit" src="img/icons/edit_pencil.svg" alt="Icono Editar">
-                    <img class="modify-delete" src="img/icons/delete_trash.svg" alt="Icono Eliminar">
-                </th>
-            </tr>
-            <tr class="item">
-                <th class="item__detail">7</th>
-                <th class="item__detail">PKM001003</th>
-                <th class="item__detail">Pidgeotto Flying</th>
-                <th class="item__detail">POKEMON</th>
-                <th class="item__modify">
-                    <img class="modify-edit" src="img/icons/edit_pencil.svg" alt="Icono Editar">
-                    <img class="modify-delete" src="img/icons/delete_trash.svg" alt="Icono Eliminar">
-                </th>
-            </tr>
-            <tr class="item">
-                <th class="item__detail">8</th>
-                <th class="item__detail">PKM001004</th>
-                <th class="item__detail">Pikachu Smiley</th>
-                <th class="item__detail">POKEMON</th>
-                <th class="item__modify">
-                    <img class="modify-edit" src="img/icons/edit_pencil.svg" alt="Icono Editar">
-                    <img class="modify-delete" src="img/icons/delete_trash.svg" alt="Icono Eliminar">
-                </th>
-            </tr>
-            <tr class="item">
-                <th class="item__detail">9</th>
-                <th class="item__detail">PKM001005</th>
-                <th class="item__detail">Vulpix Fancy</th>
-                <th class="item__detail">POKEMON</th>
-                <th class="item__modify">
-                    <img class="modify-edit" src="img/icons/edit_pencil.svg" alt="Icono Editar">
-                    <img class="modify-delete" src="img/icons/delete_trash.svg" alt="Icono Eliminar">
-                </th>
-            </tr>
-            <tr class="item">
-                <th class="item__detail">10</th>
-                <th class="item__detail">HPT001001</th>
-                <th class="item__detail">Harry Potter & Hegwid</th>
-                <th class="item__detail">HARRY POTTER</th>
-                <th class="item__modify">
-                    <img class="modify-edit" src="img/icons/edit_pencil.svg" alt="Icono Editar">
-                    <img class="modify-delete" src="img/icons/delete_trash.svg" alt="Icono Eliminar">
-                </th>
-            </tr>
-            <tr class="item">
-                <th class="item__detail">11</th>
-                <th class="item__detail">HPT001002</th>
-                <th class="item__detail">Herminione Ball Dress</th>
-                <th class="item__detail">HARRY POTTER</th>
-                <th class="item__modify">
-                    <img class="modify-edit" src="img/icons/edit_pencil.svg" alt="Icono Editar">
-                    <img class="modify-delete" src="img/icons/delete_trash.svg" alt="Icono Eliminar">
-                </th>
-            </tr>
-            <tr class="item">
-                <th class="item__detail">12</th>
-                <th class="item__detail">HPT001003</th>
-                <th class="item__detail">Luna Lovegood Lion Mask</th>
-                <th class="item__detail">HARRY POTTER</th>
-                <th class="item__modify">
-                    <img class="modify-edit" src="img/icons/edit_pencil.svg" alt="Icono Editar">
-                    <img class="modify-delete" src="img/icons/delete_trash.svg" alt="Icono Eliminar">
-                </th>
-            </tr>
-            <tr class="item">
-                <th class="item__detail">13</th>
-                <th class="item__detail">HPT001004</th>
-                <th class="item__detail">Snape Patronus</th>
-                <th class="item__detail">HARRY POTTER</th>
-                <th class="item__modify">
-                    <img class="modify-edit" src="img/icons/edit_pencil.svg" alt="Icono Editar">
-                    <img class="modify-delete" src="img/icons/delete_trash.svg" alt="Icono Eliminar">
-                </th>
-            </tr>
-            <!-- </section> -->
-        </table>
-    </section>
 </main>
 
 
